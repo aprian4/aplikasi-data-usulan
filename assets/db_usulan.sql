@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 15 Jun 2021 pada 18.37
+-- Generation Time: 16 Jun 2021 pada 08.21
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -5081,7 +5081,8 @@ CREATE TABLE `usulan` (
 
 INSERT INTO `usulan` (`id`, `kode_usulan`, `no_surat`, `id_user`, `jenis_usulan`, `tgl_usulan`, `status_usulan`, `created_at`, `updated_at`, `created_by`, `updated_by`, `rec_active`) VALUES
 (8, 'KRP006', '-', 6, 'karpeg_baru', '2021-06-08', 1, '2021-06-08 08:13:37', NULL, 'Yopi Suryana', NULL, 1),
-(14, 'KRP007', 'BKPP/021asa', 5, 'karpeg_baru', '2021-06-15', 3, '2021-06-15 05:12:06', '2021-06-15 12:17:11', 'Aprian Karisman', 'Aprian Karisman', 1);
+(14, 'KRP007', 'BKPP/021asa', 5, 'karpeg_baru', '2021-06-15', 3, '2021-06-15 05:12:06', '2021-06-15 12:17:11', 'Aprian Karisman', 'Aprian Karisman', 1),
+(15, 'KRP008', '-', 5, 'karsu_baru', '2021-06-16', 1, '2021-06-16 02:55:56', NULL, 'Aprian Karisman', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -5200,7 +5201,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `usulan`
 --
 ALTER TABLE `usulan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
