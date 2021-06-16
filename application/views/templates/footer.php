@@ -140,6 +140,34 @@
         return false;
     });
 
+    $('#form-tambah_karsu_baru').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('karsu/crud_usulan_karsu/tambah'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Disimpan',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.replace("<?= base_url('karsu/home'); ?>");
+                    }, 100);
+                } else {
+                    iziToast.error({
+                        title: 'Maaf,',
+                        message: 'Data Gagal disimpan, silahkan ulangi lagi',
+                        position: 'center'
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
     $('#form-tambah_idcard').submit(function(e) {
         e.preventDefault();
         $.ajax({

@@ -33,7 +33,7 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"> Tambah Usulan</i></button>
                         </div>
                         <!-- Modal -->
-                        <form id="form-tambah_karsu">
+                        <form id="form-tambah_karsu_baru">
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -45,15 +45,22 @@
                                         </div>
 
                                         <div class="modal-body">
-                                            <input type="date" class="form-control" name="tgl_usulan" placeholder="Tanggal Usulan" required>
+                                            <label>Nomor Surat</label>
+                                            <input type="text" class="form-control" name="no_surat" required>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <label>Tanggal Usulan</label>
+                                            <input type="date" class="form-control" name="tgl_usulan" required>
                                         </div>
 
                                         <div class="modal-body">
                                             <input type="text" name="id" value="<?= $user['id']; ?>" hidden>
+                                            <label>Jenis Usulan</label>
                                             <select class="custom-select" name='jenis_usulan' required>
                                                 <option value="" selected>Pilih Jenis Usulan</option>
-                                                <option value="karsu_baru">Pembuatan Id Card Baru</option>
-                                                <option value="karsu_pengganti">Pembuatan Id Card Pengganti Karena Hilang</option>
+                                                <option value="karsu_baru">Pembuatan Kartu Suami (Karsu)</option>
+                                                <option value="karsu_pengganti">Pembuatan Kartu Suami (Karsu) Pengganti Karena Hilang</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
@@ -67,15 +74,18 @@
 
 
                         <div class="card mb-3 col-lg-12">
-                            <table id="table-karsu" class="table table-striped dt-responsive" width="100%">
+                            <table id="table-karsu" style="font-size: 15px;" class="table table-striped dt-responsive" width="100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Kode</th>
-                                        <th scope="col">Jenis Usulan</th>
-                                        <th scope="col">Tgl Usulan</th>
-                                        <th scope="col">Jml Data</th>
+                                        <th scope="col">NoSurat</th>
+                                        <th scope="col">Jenis</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Data</th>
                                         <th scope="col">Pengusul</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">detail</th>
                                         <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -84,14 +94,21 @@
 
                                     <?php $i = 1; ?>
                                     <?php foreach ($usulan as $r) : ?>
-                                        <?php if (($r['jenis_usulan'] == 'karsu_baru') || ($r['jenis_usulan'] == 'karsu_pengganti')) : ?>
+                                        <?php if (($r['jenis_usulan'] == 'karsu_baru' || $r['jenis_usulan'] == 'karsu_pengganti')) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>
                                                 <td>
                                                     <?= $r['kode_usulan'];; ?>
                                                 </td>
                                                 <td>
-                                                    <?= $r['jenis_usulan']; ?>
+                                                    <?= $r['no_surat'];; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($r['jenis_usulan'] == 'karsu_baru') {
+                                                        echo "Baru";
+                                                    } else {
+                                                        echo "Pengganti";
+                                                    } ?>
                                                 </td>
                                                 <td><?= $r['tgl_usulan']; ?></td>
 
@@ -128,6 +145,20 @@
                                                     <?php endforeach; ?>
                                                 </td>
                                                 <td>
+                                                    <?= strtok($r['updated_by'], " "); ?>
+                                                </td>
+                                                <td>
+                                                    <?php foreach ($detail_usulan as $det) : ?>
+                                                        <?php if ($det['kode_usulan'] == $r['kode_usulan']) : ?>
+                                                            <?php foreach ($profile_pegawai as $pg) : ?>
+                                                                <?php if ($pg['nip'] == $det['nip']) : ?>
+                                                                    <?php echo $pg['nip'] . $pg['nama_lengkap'] . $pg['opd'] ?>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <td>
                                                     <?php
                                                     if ($r['status_usulan'] == 1) { ?>
                                                         <span class="badge badge-secondary">Draft</span>
@@ -135,74 +166,168 @@
                                                         <span class="badge badge-warning">Proses BKN</span>
                                                     <?php } else if ($r['status_usulan'] == 3) { ?>
                                                         <span class="badge badge-primary">Diterima BKPP</span>
-                                                    <?php } else if ($r['status_usulan'] == 4) { ?>
-                                                        <span class="badge badge-success">Dudah Diambil</span>
-
                                                     <?php } ?>
                                                 </td>
-                                                <td>
+                                                <?php if ($r['status_usulan'] == 1) { ?>
+                                                    <td>
 
-                                                    <div class="dropdown show">
-                                                        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Action
-                                                        </a>
+                                                        <div class="dropdown show">
+                                                            <a style="font-size: 14px;" class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Action
+                                                            </a>
 
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <a href="<?= base_url('karsu/detail_karsu/' . $r['id']); ?>" class="dropdown-item">
-                                                                <i class="fas fa-edit fa-sm"></i> Ubah Usulan</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editStatusModal"><i class="fas fa-check-square fa-sm"></i> Usulkan ke BKN</a></button>
-                                                            <div class="dropdown-divider"></div>
-                                                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#hapusModal"><i class="fas fa-trash fa-sm"></i> Hapus</a></button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Example single danger button -->
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                <a href="<?= base_url('karsu/detail_karsu/' . $r['id']); ?>" class="dropdown-item">
+                                                                    <i class="fas fa-edit fa-sm"></i> Ubah Usulan</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editStatusModal<?= $i ?>"><i class="fas fa-check-square fa-sm"></i> Usulkan ke BKN</a></button>
 
-                                                    <!-- Modal -->
-                                                    <form id="form-hapus_usulan_karsu">
-                                                        <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="hapusModalLabel">Apakah Anda Yakin Menghapus Data Ini?</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="<?= base_url('karsu/crud_usulan_karsu/hapus'); ?>" method="post">
                                                                     <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
                                                                     <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-danger">Ya</button>
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                    <button type="submit" class="dropdown-item"><i class="fas fa-trash fa-sm"></i> Hapus</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal -->
+                                                        <form method="POST" action="<?= base_url('karsu/crud_usulan_karsu/ubahstatus'); ?>">
+                                                            <div class="modal fade" id="editStatusModal<?= $i ?>" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title text-center" id="editStatusModalLabel">Apakah Anda Yakin Akan Mengusulkan Data ini ke BKN?</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
+                                                                        <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
+                                                                        <div class="modal-footer col-sm-8">
+                                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
 
-                                                    <!-- Modal -->
-                                                    <form id="form-edit_status_usulan_karsu">
-                                                        <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title text-center" id="editStatusModalLabel">Apakah Anda Yakin Akan Mengusulkan Data ini ke BKN?</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
-                                                                    <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
-                                                                    <div class="modal-footer col-sm-8">
-                                                                        <button type="submit" class="btn btn-danger">Ya</button>
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    </td>
+                                                <?php } else if ($r['status_usulan'] == 2) { ?>
+                                                    <td>
+                                                        <div class="dropdown show">
+                                                            <a style="font-size: 14px;" class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Action
+                                                            </a>
+
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                <a href="<?= base_url('karsu/riwayat/' . $r['id']); ?>" class="dropdown-item">
+                                                                    <i class="fas fa-eye fa-sm"></i> Details</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-edit<?= $i ?>"><i class="fas fa-edit fa-sm"></i> Ubah Status</a></button>
+
+                                                            </div>
+                                                        </div><!-- Modal -->
+                                                        <form method="POST" action="<?= base_url('karsu/crud_usulan_karsu/ubahstatus2'); ?>">
+                                                            <div class="modal fade" id="modal-edit<?= $i ?>" tabindex="-1" aria-labelledby="editStatus3ModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content col-sm-10">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title text-center" id="editStatus3ModalLabel">Ubah Status Usulan</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
+                                                                        <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
+                                                                        <div class="modal-body">
+                                                                            <label>Status Usulan</label>
+                                                                            <select class="custom-select" name='status_usulan' required>
+                                                                                <option <?php if ($r['status_usulan'] == '1') {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="1">Draft</option>
+                                                                                <option <?php if ($r['status_usulan'] == '2') {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="2">Proses BKN</option>
+                                                                                <option <?php if ($r['status_usulan'] == '3') {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="3">Diterima BKPP</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </td>
 
-                                                </td>
+                                                <?php } else { ?>
+                                                    <td>
+                                                        <div class="dropdown show">
+                                                            <a style="font-size: 14px;" class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Action
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                <!--  <form action="<?= base_url('whatsapp/send_wa'); ?>" method="post">
+                                                                    <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
+                                                                    <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
+                                                                    <button type="submit" class="dropdown-item"><i class="fas fa-mail fa-sm"></i> Kirim WA</button>
+                                                                </form>
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="<?= base_url('email/send_email'); ?>" method="post">
+                                                                    <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
+                                                                    <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
+                                                                    <button type="submit" class="dropdown-item"><i class="fas fa-mail fa-sm"></i> Kirim Email</button>
+                                                                </form>
+                                                                <div class="dropdown-divider"></div> -->
+                                                                <a href="<?= base_url('karsu/riwayat/' . $r['id']); ?>" class="dropdown-item">
+                                                                    <i class="fas fa-eye fa-sm"></i> Details</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-edit<?= $i ?>"><i class="fas fa-edit fa-sm"></i> Ubah Status</a></button>
+
+                                                            </div>
+                                                        </div><!-- Modal -->
+                                                        <form method="POST" action="<?= base_url('karsu/crud_usulan_karsu/ubahstatus2'); ?>">
+                                                            <div class="modal fade" id="modal-edit<?= $i ?>" tabindex="-1" aria-labelledby="editStatus3ModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content col-sm-10">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title text-center" id="editStatus3ModalLabel">Ubah Status Usulan</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <input type="text" name="id_usulan" value="<?= $r['id']; ?>" hidden>
+                                                                        <input type="text" name="kode_usulan" value="<?= $r['kode_usulan']; ?>" hidden>
+                                                                        <div class="modal-body">
+                                                                            <label>Status Usulan</label>
+                                                                            <select class="custom-select" name='status_usulan' required>
+                                                                                <option <?php if ($r['status_usulan'] == '1') {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="1">Draft</option>
+                                                                                <option <?php if ($r['status_usulan'] == '2') {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="2">Proses BKN</option>
+                                                                                <option <?php if ($r['status_usulan'] == '3') {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="3">Diterima BKPP</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+
+                                                <?php } ?>
+
                                             </tr>
                                             <?php $i++; ?>
                                         <?php endif; ?>
