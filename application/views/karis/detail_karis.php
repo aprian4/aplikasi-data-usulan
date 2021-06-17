@@ -18,7 +18,7 @@
 
             <div class="col-12 col-sm-12 col-lg-12">
                 <div>
-                    <a href="<?= base_url('karsu/home'); ?>">
+                    <a href="<?= base_url('karis/home'); ?>">
                         <i class="fas fa-arrow-circle-left fa-sm"></i> Kembali</a>
                 </div><br>
                 <div class="card author-box card-light">
@@ -31,7 +31,7 @@
                         <div><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ubahdataModal"><i class="fas fa-edit"> Ubah Usulan</i></button></div>
                         <br>
                         <!-- Modal -->
-                        <form id="form-edit_usulan_karsu_baru">
+                        <form id="form-edit_usulan_karis_baru">
                             <div class="modal fade" id="ubahdataModal" tabindex="-1" aria-labelledby="ubahdataModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -56,12 +56,12 @@
                                             <label>Jenis Usulan</label>
                                             <input type="text" name="id_usulan" value="<?= $usulan['id']; ?>" hidden>
                                             <select class="custom-select" name='jenis_usulan' required>
-                                                <option <?php if ($usulan['jenis_usulan'] == 'karsu_baru') {
+                                                <option <?php if ($usulan['jenis_usulan'] == 'karis_baru') {
                                                             echo "selected='selected'";
-                                                        } ?> value="karsu_baru">Pembuatan Kartu Suami (Karsu)</option>
-                                                <option <?php if ($usulan['jenis_usulan'] == 'karsu_pengganti') {
+                                                        } ?> value="karis_baru">Pembuatan Kartu Istri (Karis)</option>
+                                                <option <?php if ($usulan['jenis_usulan'] == 'karis_pengganti') {
                                                             echo "selected='selected'";
-                                                        } ?> value="karsu_pengganti">Pembuatan Kartu Suami (Karsu) Pengganti Karena Hilang</option>
+                                                        } ?> value="karis_pengganti">Pembuatan Kartu Istri (Karis) Pengganti Karena Hilang</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
@@ -89,10 +89,10 @@
                             <tr>
                                 <th style=" width: 13%;">Junis Usulan</th>
                                 <td> :
-                                    <?php if ($usulan['jenis_usulan'] == 'karsu_baru') {
-                                        echo "Kartu Suami";
+                                    <?php if ($usulan['jenis_usulan'] == 'karis_baru') {
+                                        echo "Kartu Istri";
                                     } else {
-                                        echo "Kartu Suami Pengganti";
+                                        echo "Kartu Istri Pengganti";
                                     }  ?>
                                 </td>
                             </tr>
@@ -100,17 +100,17 @@
 
                         <br>
                         <div class=" mb-3" align="right"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahdataModal"><i class="fas fa-user-plus"> Tambah Pegawai</i></button>
-                            <a href="<?= base_url('download/surat_usulan_karsu/' . $usulan['kode_usulan']); ?>" class="btn btn-warning"><i class="fas fa-download"> Surat Usulan</i></a>
+                            <a href="<?= base_url('download/surat_usulan_karis/' . $usulan['kode_usulan']); ?>" class="btn btn-warning"><i class="fas fa-download"> Surat Usulan</i></a>
                         </div>
 
                         <?= $this->session->flashdata('usulan'); ?>
                         <!-- Modal -->
-                        <form id="form-tambah_pegawai_karsu">
+                        <form id="form-tambah_pegawai_karis">
                             <div class="modal fade" id="tambahdataModal" tabindex="-1" aria-labelledby="tambahdataModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="tambahdataModalLabel">Tambah Suami</h5>
+                                            <h5 class="modal-title" id="tambahdataModalLabel">Tambah Istri</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -125,7 +125,7 @@
                                                             <input type="text" name="kode_usulan" value="<?= $usulan['kode_usulan']; ?>" hidden>
                                                             <select name="nip" class="selectpicker form-control" data-live-search="true" required>
                                                                 <?php if ($pegawai != null) : ?>
-                                                                    <option value="">Pilih Suami</option>
+                                                                    <option value="">Pilih Istri</option>
                                                                     <?php foreach ($pegawai as $p) : ?>
                                                                         <option value="<?= $p['nip']; ?>"><?= $p['nip']; ?> - <?= ucwords(strtolower($p['nama'])); ?></option>
                                                                     <?php endforeach; ?>
@@ -158,7 +158,7 @@
 
 
                         <div class="card mb-3 col-lg-12">
-                            <table id="table-detail_karsu" style="font-size: 15px;" class="table table-striped dt-responsive" width="100%">
+                            <table id="table-detail_karis" style="font-size: 15px;" class="table table-striped dt-responsive" width="100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
@@ -199,13 +199,13 @@
                                                         <div class="dropdown-menu">
                                                             <button type="button" class="dropdown-item" data-toggle="modal" data-target="#lengkapi-data<?= $i ?>"><i class="fas fa-user-edit fa-sm"></i> Lengkapi Data</button>
                                                             <div class="dropdown-divider"></div>
-                                                            <form action="<?= base_url('karsu/upload_berkas/' . $lu['nip']); ?>" method="post">
+                                                            <form action="<?= base_url('karis/upload_berkas/' . $lu['nip']); ?>" method="post">
                                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                                 <input type="text" name="id_usulan" value="<?= $usulan['id']; ?>" hidden>
                                                                 <button type="submit" class="dropdown-item"><i class="fas fa-upload fa-sm"></i> Upload Berkas</button>
                                                             </form>
                                                             <div class="dropdown-divider"></div>
-                                                            <form action="<?= base_url('karsu/crud_usulan_detail_karsu/hapus/' . $lu['nip']); ?>" method="post">
+                                                            <form action="<?= base_url('karis/crud_usulan_detail_karis/hapus/' . $lu['nip']); ?>" method="post">
                                                                 <input type="text" name="kode_usulan" value="<?= $usulan['kode_usulan']; ?>" hidden>
                                                                 <input type="text" name="id_usulan" value="<?= $usulan['id']; ?>" hidden>
                                                                 <button type="submit" class="dropdown-item"><i class="fas fa-trash fa-sm"></i> Hapus</button>
@@ -214,12 +214,12 @@
                                                         </div>
 
                                                         <!-- Modal -->
-                                                        <form method="POST" action="<?= base_url('karsu/crud_usulan_detail_karsu/lengkapidata/' . $lu['nip']); ?>">
+                                                        <form method="POST" action="<?= base_url('karis/crud_usulan_detail_karis/lengkapidata/' . $lu['nip']); ?>">
                                                             <div class="modal fade" id="lengkapi-data<?= $i ?>" tabindex="-1" aria-labelledby="lengkapi-dataLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="lengkapi-dataLabel">Lengkapi Data Suami</h5>
+                                                                            <h5 class="modal-title" id="lengkapi-dataLabel">Lengkapi Data Istri</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>

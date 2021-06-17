@@ -168,6 +168,62 @@
         return false;
     });
 
+    $('#form-tambah_idcard_baru').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('idcard/crud_usulan_idcard/tambah'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Disimpan',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.replace("<?= base_url('idcard/home'); ?>");
+                    }, 100);
+                } else {
+                    iziToast.error({
+                        title: 'Maaf,',
+                        message: 'Data Gagal disimpan, silahkan ulangi lagi',
+                        position: 'center'
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#form-tambah_karis_baru').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('karis/crud_usulan_karis/tambah'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Disimpan',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.replace("<?= base_url('karis/home'); ?>");
+                    }, 100);
+                } else {
+                    iziToast.error({
+                        title: 'Maaf,',
+                        message: 'Data Gagal disimpan, silahkan ulangi lagi',
+                        position: 'center'
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
     $('#form-tambah_idcard').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -225,11 +281,67 @@
         return false;
     });
 
+    $('#form-edit_usulan_karsu_baru').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('karsu/crud_usulan_karsu/ubah'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Diubah',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                } else {
+                    iziToast.error({
+                        title: 'Maaf,',
+                        message: 'Data Gagal disimpan, silahkan ulangi lagi',
+                        position: 'center'
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
     $('#form-edit_usulan_idcard_baru').submit(function(e) {
         e.preventDefault();
         $.ajax({
             type: 'POST',
             url: "<?= base_url('idcard/crud_usulan_idcard/ubah'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Diubah',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                } else {
+                    iziToast.error({
+                        title: 'Maaf,',
+                        message: 'Data Gagal disimpan, silahkan ulangi lagi',
+                        position: 'center'
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#form-edit_usulan_karis_baru').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('karis/crud_usulan_karis/ubah'); ?>",
             data: $(this).serialize(),
             success: function(data) {
                 if (data == "ok") {
@@ -362,6 +474,84 @@
         return false;
     });
 
+    $('#form-tambah_pegawai_karsu').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('karsu/crud_usulan_karsu/tambah_pegawai'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Disimpan',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                } else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#form-tambah_pegawai_idcard').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('idcard/crud_usulan_idcard/tambah_pegawai'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Disimpan',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                } else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#form-tambah_pegawai_karis').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('karis/crud_usulan_karis/tambah_pegawai'); ?>",
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == "ok") {
+                    iziToast.success({
+                        title: 'Berhasil!',
+                        message: 'Data Usulan Berhasil Disimpan',
+                        position: 'center'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                } else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 100);
+                }
+            }
+        });
+        return false;
+    });
+
     $('#form-tambah_pegawai_idcard').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -427,8 +617,8 @@
             pageLength: 10,
             autoWidth: false,
             "columnDefs": [{
-                "className": "dt-center",
-                "targets": "_all"
+                "targets": 8,
+                "visible": false
             }]
 
         });
@@ -449,8 +639,8 @@
             pageLength: 10,
             autoWidth: false,
             "columnDefs": [{
-                "className": "dt-center",
-                "targets": "_all"
+                "targets": 8,
+                "visible": false
             }]
 
         });
@@ -471,10 +661,9 @@
             pageLength: 10,
             autoWidth: false,
             "columnDefs": [{
-                "className": "dt-center",
-                "targets": "_all"
+                "targets": 8,
+                "visible": false
             }]
-
         });
     });
 
@@ -527,7 +716,154 @@
 
 
     $(document).ready(function() {
+        $('#table-detail_karsu').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //   extend: 'pdfHtml5',
+            // title: 'Data Usulan Kartu Pegawai',
+            //text: 'Download Pdf',
+            //}, {
+            //  extend: 'excelHtml5',
+            //title: 'Data Usulan Kartu Pegawai',
+            //  text: 'Download Excel',
+            // }],
+            searching: false,
+            lengthChange: false,
+            paging: false,
+            ordering: false,
+            autoWidth: false,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }]
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('#table-detail_karis').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //   extend: 'pdfHtml5',
+            // title: 'Data Usulan Kartu Pegawai',
+            //text: 'Download Pdf',
+            //}, {
+            //  extend: 'excelHtml5',
+            //title: 'Data Usulan Kartu Pegawai',
+            //  text: 'Download Excel',
+            // }],
+            searching: false,
+            lengthChange: false,
+            paging: false,
+            ordering: false,
+            autoWidth: false,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }]
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('#table-detail_idcard').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //   extend: 'pdfHtml5',
+            // title: 'Data Usulan Kartu Pegawai',
+            //text: 'Download Pdf',
+            //}, {
+            //  extend: 'excelHtml5',
+            //title: 'Data Usulan Kartu Pegawai',
+            //  text: 'Download Excel',
+            // }],
+            searching: false,
+            lengthChange: false,
+            paging: false,
+            ordering: false,
+            autoWidth: false,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }]
+        });
+    });
+
+
+    $(document).ready(function() {
         $('#table-riwayat_karpeg').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //   extend: 'pdfHtml5',
+            // title: 'Data Usulan Kartu Pegawai',
+            //text: 'Download Pdf',
+            //}, {
+            //  extend: 'excelHtml5',
+            //title: 'Data Usulan Kartu Pegawai',
+            //  text: 'Download Excel',
+            // }],
+            searching: false,
+            lengthChange: false,
+            paging: false,
+            ordering: false,
+            autoWidth: false,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }]
+        });
+    });
+
+    $(document).ready(function() {
+        $('#table-riwayat_karsu').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //   extend: 'pdfHtml5',
+            // title: 'Data Usulan Kartu Pegawai',
+            //text: 'Download Pdf',
+            //}, {
+            //  extend: 'excelHtml5',
+            //title: 'Data Usulan Kartu Pegawai',
+            //  text: 'Download Excel',
+            // }],
+            searching: false,
+            lengthChange: false,
+            paging: false,
+            ordering: false,
+            autoWidth: false,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }]
+        });
+    });
+
+    $(document).ready(function() {
+        $('#table-riwayat_karis').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //   extend: 'pdfHtml5',
+            // title: 'Data Usulan Kartu Pegawai',
+            //text: 'Download Pdf',
+            //}, {
+            //  extend: 'excelHtml5',
+            //title: 'Data Usulan Kartu Pegawai',
+            //  text: 'Download Excel',
+            // }],
+            searching: false,
+            lengthChange: false,
+            paging: false,
+            ordering: false,
+            autoWidth: false,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }]
+        });
+    });
+
+    $(document).ready(function() {
+        $('#table-riwayat_idcard').DataTable({
             // dom: 'Bfrtip',
             // buttons: [{
             //   extend: 'pdfHtml5',
@@ -648,7 +984,7 @@
     $(document).ready(function() {
 
         function checkDisabled(evt) {
-            var val = $("input[name=status_karpeg]:checked").val();
+            var val = $("input[name=status_kartu]:checked").val();
             if (val == 1) {
                 $("#formDitolak").hide();
                 $("#formDisetujui").show();
@@ -657,7 +993,7 @@
                 $("#formDitolak").show();
             }
         }
-        $('input[name=status_karpeg]:radio').change(checkDisabled);
+        $('input[name=status_kartu]:radio').change(checkDisabled);
         checkDisabled();
     });
 </script>

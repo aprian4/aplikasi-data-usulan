@@ -17,7 +17,7 @@
 
             <div class="col-12 col-sm-12 col-lg-12">
                 <div>
-                    <a href="<?= base_url('idcard/detail_idcard/' . $id_usulan); ?>">
+                    <a href="<?= base_url('karis/detail_karis/' . $id_usulan); ?>">
                         <i class="fas fa-arrow-circle-left fa-sm"></i> Kembali</a>
                 </div><br>
                 <div class="card author-box card-light">
@@ -53,7 +53,7 @@
                                             <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_sp['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas1"><i class="fas fa-times-circle"></i> Batal</button>
                                             <!-- Modal -->
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                 <div class="modal fade" id="hapusBerkas1" tabindex="-1" aria-labelledby="hapusBerkas1Label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -76,7 +76,7 @@
                                                 </div>
                                             </form>
                                         <?php } else { ?>
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/suratpengantar'); ?>' enctype='multipart/form-data'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/suratpengantar'); ?>' enctype='multipart/form-data'>
                                                 <input type='file' name='file'>
                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                 <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -100,7 +100,7 @@
                                             <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_skcpns['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas2"><i class="fas fa-times-circle"></i> Batal</button>
                                             <!-- Modal -->
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                 <div class="modal fade" id="hapusBerkas2" tabindex="-1" aria-labelledby="hapusBerkas2Label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -123,7 +123,7 @@
                                                 </div>
                                             </form>
                                         <?php } else { ?>
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/skcpns'); ?>' enctype='multipart/form-data'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/skcpns'); ?>' enctype='multipart/form-data'>
                                                 <input type='file' name='file'>
                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                 <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -147,7 +147,7 @@
                                             <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_skpns['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas3"><i class="fas fa-times-circle"></i> Batal</button>
                                             <!-- Modal -->
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                 <div class="modal fade" id="hapusBerkas3" tabindex="-1" aria-labelledby="hapusBerkas3Label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -170,7 +170,7 @@
                                                 </div>
                                             </form>
                                         <?php } else { ?>
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/skpns'); ?>' enctype='multipart/form-data'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/skpns'); ?>' enctype='multipart/form-data'>
                                                 <input type='file' name='file'>
                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                 <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -194,7 +194,7 @@
                                             <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_sttpp['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas4"><i class="fas fa-times-circle"></i> Batal</button>
                                             <!-- Modal -->
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                 <div class="modal fade" id="hapusBerkas4" tabindex="-1" aria-labelledby="hapusBerkas4Label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -217,7 +217,7 @@
                                                 </div>
                                             </form>
                                         <?php } else { ?>
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/sttpp'); ?>' enctype='multipart/form-data'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/sttpp'); ?>' enctype='multipart/form-data'>
                                                 <input type='file' name='file'>
                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                 <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -241,7 +241,7 @@
                                             <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_foto['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas5"><i class="fas fa-times-circle"></i> Batal</button>
                                             <!-- Modal -->
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                 <div class="modal fade" id="hapusBerkas5" tabindex="-1" aria-labelledby="hapusBerkas5Label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -263,7 +263,7 @@
                                                     </div>
                                                 </div>
                                             </form><?php } else { ?>
-                                            <form method='post' action='<?php echo base_url('idcard/crud_upload/fotopns'); ?>' enctype='multipart/form-data'>
+                                            <form method='post' action='<?php echo base_url('karis/crud_upload/fotopns'); ?>' enctype='multipart/form-data'>
                                                 <input type='file' name='file'>
                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                 <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -274,7 +274,7 @@
                                     </td>
                                 </tr>
 
-                                <?php if ($usulan['jenis_usulan'] == "idcard_pengganti") { ?>
+                                <?php if ($usulan['jenis_usulan'] == "karis_pengganti") { ?>
 
                                     <tr>
                                         <td>
@@ -290,7 +290,7 @@
                                                 <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_lampiranx['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas6"><i class="fas fa-times-circle"></i> Batal</button>
                                                 <!-- Modal -->
-                                                <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                                <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                     <div class="modal fade" id="hapusBerkas6" tabindex="-1" aria-labelledby="hapusBerkas6Label" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -312,7 +312,7 @@
                                                         </div>
                                                     </div>
                                                 </form><?php } else { ?>
-                                                <form method='post' action='<?php echo base_url('idcard/crud_upload/lampiranx'); ?>' enctype='multipart/form-data'>
+                                                <form method='post' action='<?php echo base_url('karis/crud_upload/lampiranx'); ?>' enctype='multipart/form-data'>
                                                     <input type='file' name='file'>
                                                     <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                     <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -336,7 +336,7 @@
                                                 <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_lampiranxi['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas7"><i class="fas fa-times-circle"></i> Batal</button>
                                                 <!-- Modal -->
-                                                <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                                <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                     <div class="modal fade" id="hapusBerkas7" tabindex="-1" aria-labelledby="hapusBerkas7Label" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -358,7 +358,7 @@
                                                         </div>
                                                     </div>
                                                 </form><?php } else { ?>
-                                                <form method='post' action='<?php echo base_url('idcard/crud_upload/lampiranxi'); ?>' enctype='multipart/form-data'>
+                                                <form method='post' action='<?php echo base_url('karis/crud_upload/lampiranxi'); ?>' enctype='multipart/form-data'>
                                                     <input type='file' name='file'>
                                                     <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                     <input type='text' name='nip' value="<?= $nip; ?>" hidden>
@@ -382,7 +382,7 @@
                                                 <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($berkas_kehilangan['path']); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusBerkas8"><i class="fas fa-times-circle"></i> Batal</button>
                                                 <!-- Modal -->
-                                                <form method='post' action='<?php echo base_url('idcard/crud_upload/hapus'); ?>'>
+                                                <form method='post' action='<?php echo base_url('karis/crud_upload/hapus'); ?>'>
                                                     <div class="modal fade" id="hapusBerkas8" tabindex="-1" aria-labelledby="hapusBerkas8Label" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -404,7 +404,7 @@
                                                         </div>
                                                     </div>
                                                 </form><?php } else { ?>
-                                                <form method='post' action='<?php echo base_url('idcard/crud_upload/kehilangan'); ?>' enctype='multipart/form-data'>
+                                                <form method='post' action='<?php echo base_url('karis/crud_upload/kehilangan'); ?>' enctype='multipart/form-data'>
                                                     <input type='file' name='file'>
                                                     <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                     <input type='text' name='nip' value="<?= $nip; ?>" hidden>

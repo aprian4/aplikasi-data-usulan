@@ -97,10 +97,10 @@
                                                         <?= ($lu['tgl_terbit'] != null) ? $lu['tgl_terbit'] : ""; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($lu['status_karpeg'] != null) {
-                                                            if ($lu['status_karpeg'] == 1) {
+                                                        <?php if ($lu['status_kartu'] != null) {
+                                                            if ($lu['status_kartu'] == 1) {
                                                                 echo "Diterima";
-                                                            } else if ($lu['status_karpeg'] == 2) {
+                                                            } else if ($lu['status_kartu'] == 2) {
                                                                 echo "Ditolak";
                                                             }
                                                         } ?>
@@ -127,8 +127,8 @@
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-dataKarpeg<?= $i ?>"><i class="fas fa-edit fa-sm"></i> Data Karpeg</a></button>
                                                                 <div class="dropdown-divider"></div>
-                                                                <?php if ($lu['status_karpeg'] != null) {
-                                                                    if ($lu['status_karpeg'] == 1) { ?>
+                                                                <?php if ($lu['status_kartu'] != null) {
+                                                                    if ($lu['status_kartu'] == 1) { ?>
                                                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-kirimNotifikasi<?= $i ?>"><i class="fas fa-envelope-square"></i> Kirim Notifikasi</a></button>
                                                                         <div class="dropdown-divider"></div>
                                                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-tandaTerima<?= $i ?>"><i class="fas fa-clipboard-check"></i> Tanda Terima</a></button>
@@ -175,8 +175,8 @@
                                                                         <div class="modal-body">
                                                                             <div id="statusKarpeg">
                                                                                 <label>Status Kartu Pegawai</label><br>
-                                                                                <input type="radio" id="status_karpeg1" name="status_karpeg" value="1" <?= ($lu['status_karpeg'] == 1) ? "checked" : ""; ?>> Disetujui</input><br>
-                                                                                <input type="radio" id="status_karpeg2" name="status_karpeg" value="2" <?= ($lu['status_karpeg'] == 2) ? "checked" : ""; ?>> Ditolak</input>
+                                                                                <input type="radio" id="status_kartu1" name="status_kartu" value="1" <?= ($lu['status_kartu'] == 1) ? "checked" : ""; ?>> Disetujui</input><br>
+                                                                                <input type="radio" id="status_kartu2" name="status_kartu" value="2" <?= ($lu['status_kartu'] == 2) ? "checked" : ""; ?>> Ditolak</input>
                                                                                 <input type="text" name="id_usulan" value="<?= $usulan['id']; ?>" hidden>
                                                                                 <input type="text" name="jenis_usulan" value="<?= $usulan['jenis_usulan']; ?>" hidden>
                                                                                 <input type="text" name="kode_usulan" value="<?= $usulan['kode_usulan']; ?>" hidden>

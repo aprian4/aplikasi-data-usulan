@@ -58,8 +58,8 @@ class Karsu extends CI_Controller
                 $berkas1 = "PENGANTAR_KARSU_BARU_" . $lu['nip'];
             } else if ($data['usulan']['jenis_usulan'] == "karsu_pengganti") {
                 $berkas1 = "PENGANTAR_KARSU_PENGGANTI_" . $lu['nip'];
-                $berkas6 = 'LAMPIRAN_X_' . $lu['nip'];
-                $berkas7 = 'LAMPIRAN_XI_' . $lu['nip'];
+                $berkas6 = 'LAMPIRAN_X_KARSU_' . $lu['nip'];
+                $berkas7 = 'LAMPIRAN_XI_KARSU_' . $lu['nip'];
                 $berkas8 = 'KEHILANGAN_KARSU_' . $lu['nip'];
             }
             $berkas2 = 'SK_CPNS_' . $lu['nip'];
@@ -182,8 +182,8 @@ class Karsu extends CI_Controller
             $namaberkas_sp = "PENGANTAR_KARSU_BARU_" . $nip;
         } else if ($jenis_usulan == "karsu_pengganti") {
             $namaberkas_sp = "PENGANTAR_KARSU_PENGGANTI_" . $nip;
-            $namaberkas_lampiranx = "LAMPIRAN_X_" . $nip;
-            $namaberkas_lampiranxi = "LAMPIRAN_XI_" . $nip;
+            $namaberkas_lampiranx = "LAMPIRAN_X_KARSU_" . $nip;
+            $namaberkas_lampiranxi = "LAMPIRAN_XI_KARSU_" . $nip;
             $namaberkas_kehilangan = "KEHILANGAN_KARSU_" . $nip;
 
             $data['berkas_lampiranx'] = $this->db->get_where('berkas', ['nip' => $nip, 'nama_berkas' => $namaberkas_lampiranx])->row_array();
@@ -225,14 +225,14 @@ class Karsu extends CI_Controller
             $this->load->model('Usulan_model', 'usulan');
             $Kode = $this->usulan->getKodeMax();
             if (!empty($Kode['kodeTerbesar'])) {
-                $urutan = (int) substr($Kode['kodeTerbesar'], 3, 3);
+                $urutan = (int) substr($Kode['kodeTerbesar'], -5);
                 $urutan++;
             } else {
                 $urutan = 1;
             }
 
-            $huruf = "KRP";
-            $kodeUsulan = $huruf . sprintf("%03s", $urutan);
+            $huruf = "KRU";
+            $kodeUsulan = $huruf . sprintf("%05s", $urutan);
 
             $username = $this->session->userdata('username');
             $created_by = $this->db->get_where('user', ['username' => $username])->row_array();
@@ -459,8 +459,8 @@ class Karsu extends CI_Controller
             $namaberkas_sp = "PENGANTAR_KARSU_BARU_" . $nip;
         } else if ($jenis_usulan == "karsu_pengganti") {
             $namaberkas_sp = "PENGANTAR_KARSU_PENGGANTI_" . $nip;
-            $namaberkas_lampiranx = "LAMPIRAN_X_" . $nip;
-            $namaberkas_lampiranxi = "LAMPIRAN_XI_" . $nip;
+            $namaberkas_lampiranx = "LAMPIRAN_X_KARSU_" . $nip;
+            $namaberkas_lampiranxi = "LAMPIRAN_XI_KARSU_" . $nip;
             $namaberkas_kehilangan = "KEHILANGAN_KARSU_" . $nip;
 
             $data['berkas_lampiranx'] = $this->db->get_where('berkas', ['nip' => $nip, 'nama_berkas' => $namaberkas_lampiranx])->row_array();
@@ -498,8 +498,8 @@ class Karsu extends CI_Controller
                 $berkas1 = "PENGANTAR_KARSU_BARU_" . $nip;
             } else if ($jenis_usulan == "karsu_pengganti") {
                 $berkas1 = "PENGANTAR_KARSU_PENGGANTI_" . $nip;
-                $berkas6 = "LAMPIRAN_X_" . $nip;
-                $berkas7 = "LAMPIRAN_XI_" . $nip;
+                $berkas6 = "LAMPIRAN_X_KARSU_" . $nip;
+                $berkas7 = "LAMPIRAN_XI_KARSU_" . $nip;
                 $berkas8 = "KEHILANGAN_KARSU_" . $nip;
             }
             $berkas2 = 'SK_CPNS_' . $lu['nip'];
@@ -587,14 +587,14 @@ class Karsu extends CI_Controller
             $nip = $this->input->post('nip');
             $id_usulan = $this->input->post('id_usulan');
             $jenis_usulan = $this->input->post('jenis_usulan');
-            $status_karsu =  $this->input->post('status_karsu');
+            $status_kartu =  $this->input->post('status_kartu');
             $kode_usulan =  $this->input->post('kode_usulan');
             $no_kartu =  $this->input->post('no_kartu');
             $no_keputusan =  $this->input->post('no_keputusan');
             $tgl_terbit =  $this->input->post('tgl_terbit');
             $keterangan =  $this->input->post('keterangan');
 
-            if ($status_karsu == 1) {
+            if ($status_kartu == 1) {
                 // Check form submit or not 
                 $namaberkas = "SCAN_KARSU_" . $nip;
                 $data = array();
@@ -632,7 +632,7 @@ class Karsu extends CI_Controller
                     'no_kartu' => $no_kartu,
                     'no_keputusan' => $no_keputusan,
                     'tgl_terbit' => date('d-m-Y', strtotime($tgl_terbit)),
-                    'status_karsu' => $status_karsu,
+                    'status_kartu' => $status_kartu,
                     'keterangan' => null,
                     'posisi' => 1,
                 ];
@@ -641,9 +641,9 @@ class Karsu extends CI_Controller
 
                 // load view 
                 redirect((base_url('karsu/riwayat/') . $id_usulan));
-            } else if ($status_karsu == 2) {
+            } else if ($status_kartu == 2) {
                 $data = [
-                    'status_karsu' => $status_karsu,
+                    'status_kartu' => $status_kartu,
                     'keterangan' => $keterangan,
                     'no_kartu' => null,
                     'no_keputusan' => null,
@@ -670,7 +670,7 @@ class Karsu extends CI_Controller
             } else if ($profile['gender'] == "w") {
                 $gender = "Ibu";
             }
-            $message = "Yth.  " . $gender . " " . $nama_lengkap . "," . "%0D%0A" . "Kartu Suami (KARSU) anda sudah selesai dicetak. Silahkan untuk mengambilnya di BKPP. Kami juga telah mengirim softcopy/ scan kartu pegawai anda melalui email anda. %0D%0A%0D%0A" . "Manajemen Kinerja - BKPP Tangsel";
+            $message = "Yth.  " . $gender . " " . $nama_lengkap . "," . "%0D%0A" . "Kartu Suami (KARSU) anda sudah selesai dicetak. Silahkan untuk mengambilnya di BKPP. Kami juga telah mengirim softcopy/ scan kartu suami (KARSU) anda melalui email anda. %0D%0A%0D%0A" . "Manajemen Kinerja - BKPP Tangsel";
             $notif = send_wa($no_hp, $message);
             $result = "Notifikasi WA gagal dikirim ke " . $no_hp;
             if ($notif['message'] == 'Sukses! Pesan telah terkirim') {
@@ -685,7 +685,7 @@ class Karsu extends CI_Controller
             $email = $profile['email'];
             $path = base_url($path_berkas);
             $subject = "Pemberitahuan Kartu Suami (KARSU)";
-            $message =  "Yth.  " . $gender . " " . $nama_lengkap . ",<br> Kartu Suami (KARSU) anda sudah selesai dicetak. Silahkan untuk mengambilnya di BKPP. Kami juga telah melampirkan softcopy/ scan kartu pegawai anda. <br><br> Manajemen Kinerja - BKPP Tangsel";
+            $message =  "Yth.  " . $gender . " " . $nama_lengkap . ",<br> Kartu Suami (KARSU) anda sudah selesai dicetak. Silahkan untuk mengambilnya di BKPP. Kami juga telah melampirkan softcopy/ scan kartu suami (KARSU) anda. <br><br> Manajemen Kinerja - BKPP Tangsel";
 
             $result2 = "Notifikasi Email gagal dikirim";
             $result_sendemail = send_email($email, $path, $subject, $message);
@@ -1061,7 +1061,7 @@ class Karsu extends CI_Controller
             $this->load->helper('url');
 
             $nip = $this->input->post('nip');
-            $namaberkas = "LAMPIRAN_X_" . $nip;
+            $namaberkas = "LAMPIRAN_X_KARSU_" . $nip;
             $id_usulan = $this->input->post('id_usulan');
 
             // Check form submit or not 
@@ -1117,7 +1117,7 @@ class Karsu extends CI_Controller
             $this->load->helper('url');
 
             $nip = $this->input->post('nip');
-            $namaberkas = "LAMPIRAN_XI_" . $nip;
+            $namaberkas = "LAMPIRAN_XI_KARSU_" . $nip;
             $id_usulan = $this->input->post('id_usulan');
 
             // Check form submit or not 

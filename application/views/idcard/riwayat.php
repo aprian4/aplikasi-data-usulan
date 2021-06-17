@@ -17,7 +17,7 @@
 
             <div class="col-12 col-sm-12 col-lg-12">
                 <div>
-                    <a href="<?= base_url('karsu/home'); ?>">
+                    <a href="<?= base_url('idcard/home'); ?>">
                         <i class="fas fa-arrow-circle-left fa-sm"></i> Kembali</a>
                 </div><br>
                 <div class="card author-box card-light">
@@ -43,10 +43,10 @@
                             <tr>
                                 <th style=" width: 13%;">Junis Usulan</th>
                                 <td> :
-                                    <?php if ($usulan['jenis_usulan'] == 'karsu_baru') {
-                                        echo "Kartu Suami Baru";
+                                    <?php if ($usulan['jenis_usulan'] == 'idcard_baru') {
+                                        echo "Kartu Tanda Pengenal Baru";
                                     } else {
-                                        echo "Kartu Suami Pengganti";
+                                        echo "Kartu Tanda Pengenal Pengganti";
                                     }  ?>
                                 </td>
                             </tr>
@@ -55,7 +55,7 @@
                         <br>
                         <?= $this->session->flashdata('upload'); ?>
                         <div class="card mb-3 col-lg-12">
-                            <table id="table-riwayat_karsu" style="font-size: 13px;" class="table table-striped dt-responsive" width="100%">
+                            <table id="table-riwayat_idcard" style="font-size: 13px;" class="table table-striped dt-responsive" width="100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
@@ -118,14 +118,14 @@
 
                                                 <td>
                                                     <?php if ($usulan['status_usulan'] == 2) { ?>
-                                                        <a style="color:#fff" class="lihat btn btn-primary btn-sm" href="<?= base_url('karsu/riwayat_berkas/' . $lu['nip'] . '/' . $usulan['id'] . '/' . $usulan['jenis_usulan']); ?>" role="button"><i class="fas fa-file"></i> Berkas</a>
+                                                        <a style="color:#fff" class="lihat btn btn-primary btn-sm" href="<?= base_url('idcard/riwayat_berkas/' . $lu['nip'] . '/' . $usulan['id'] . '/' . $usulan['jenis_usulan']); ?>" role="button"><i class="fas fa-file"></i> Berkas</a>
                                                     <?php } else { ?>
                                                         <div class="dropdown show">
                                                             <a style="font-size: 14px;" class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 Action
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-dataKarsu<?= $i ?>"><i class="fas fa-edit fa-sm"></i> Data Karsu</a></button>
+                                                                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-dataIdcard<?= $i ?>"><i class="fas fa-edit fa-sm"></i> Data Idcard</a></button>
                                                                 <div class="dropdown-divider"></div>
                                                                 <?php if ($lu['status_kartu'] != null) {
                                                                     if ($lu['status_kartu'] == 1) { ?>
@@ -135,11 +135,11 @@
                                                                         <div class="dropdown-divider"></div>
                                                                 <?php }
                                                                 } ?>
-                                                                <a class="dropdown-item" href="<?= base_url('karsu/riwayat_berkas/' . $lu['nip'] . '/' . $usulan['id'] . '/' . $usulan['jenis_usulan']); ?>"><i class="fas fa-file"></i> Berkas</a>
+                                                                <a class="dropdown-item" href="<?= base_url('idcard/riwayat_berkas/' . $lu['nip'] . '/' . $usulan['id'] . '/' . $usulan['jenis_usulan']); ?>"><i class="fas fa-file"></i> Berkas</a>
                                                             </div>
                                                         </div>
                                                         <!-- Modal -->
-                                                        <form method="POST" action="<?= base_url('karsu/crud_riwayat/kirimnotifikasi'); ?>">
+                                                        <form method="POST" action="<?= base_url('idcard/crud_riwayat/kirimnotifikasi'); ?>">
                                                             <div class="modal fade" id="modal-kirimNotifikasi<?= $i ?>" tabindex="-1" aria-labelledby="kirimNotifikasiModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content col-sm-12">
@@ -162,19 +162,19 @@
                                                         </form>
 
                                                         <!-- Modal -->
-                                                        <form method="POST" action="<?= base_url('karsu/crud_riwayat/datakarsu'); ?>" enctype='multipart/form-data'>
-                                                            <div class="modal fade" id="modal-dataKarsu<?= $i ?>" tabindex="-1" aria-labelledby="dataKarsuModalLabel" aria-hidden="true">
+                                                        <form method="POST" action="<?= base_url('idcard/crud_riwayat/dataidcard'); ?>" enctype='multipart/form-data'>
+                                                            <div class="modal fade" id="modal-dataIdcard<?= $i ?>" tabindex="-1" aria-labelledby="dataIdcardModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content col-sm-12">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title text-center" id="dataKarsuModalLabel">Data Kartu Suami</h5>
+                                                                            <h5 class="modal-title text-center" id="dataIdcardModalLabel">Data Kartu Tanda Pengenal</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <div id="statusKarsu">
-                                                                                <label>Status Kartu Suami</label><br>
+                                                                            <div id="statusIdcard">
+                                                                                <label>Status Kartu Tanda Pengenal</label><br>
                                                                                 <input type="radio" id="status_kartu1" name="status_kartu" value="1" <?= ($lu['status_kartu'] == 1) ? "checked" : ""; ?>> Disetujui</input><br>
                                                                                 <input type="radio" id="status_kartu2" name="status_kartu" value="2" <?= ($lu['status_kartu'] == 2) ? "checked" : ""; ?>> Ditolak</input>
                                                                                 <input type="text" name="id_usulan" value="<?= $usulan['id']; ?>" hidden>
@@ -184,10 +184,10 @@
                                                                                 <div class="dropdown-divider"></div><br>
                                                                             </div>
                                                                             <div id="formDisetujui">
-                                                                                <label>Scan Kartu Suami (Format file .pdf | max. 2MB)</label><br>
+                                                                                <label>Scan Kartu Tanda Pengenal (Format file .pdf | max. 2MB)</label><br>
                                                                                 <?php $path_berkas = null; ?>
                                                                                 <?php foreach ($berkas as $bks) {
-                                                                                    $nama_berkas = "SCAN_KARSU_" . $lu['nip'];
+                                                                                    $nama_berkas = "SCAN_IDCARD_" . $lu['nip'];
                                                                                     if ($bks['nama_berkas'] == $nama_berkas) {
                                                                                         $path_berkas = $bks['path'];
                                                                                         $id_berkas = $bks['id'];
@@ -196,12 +196,12 @@
                                                                                 <?php if ($path_berkas != null) { ?>
                                                                                     <br>
                                                                                     <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($path_berkas); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
-                                                                                    <a style="color:#fff" class="lihat btn btn-danger btn-sm" href="<?= base_url('karsu/hapus_berkas_karsu/' . $id_berkas . '/' . $usulan['id']); ?>" role="button"><i class="fas fa-times-circle"></i> Batal</a>
+                                                                                    <a style="color:#fff" class="lihat btn btn-danger btn-sm" href="<?= base_url('idcard/hapus_berkas_idcard/' . $id_berkas . '/' . $usulan['id']); ?>" role="button"><i class="fas fa-times-circle"></i> Batal</a>
                                                                                 <?php } else { ?>
                                                                                     <input type='file' name='file'>
                                                                                 <?php } ?>
                                                                                 <br><br>
-                                                                                <label>Nomor Kartu Suami</label>
+                                                                                <label>Nomor Kartu Tanda Pengenal</label>
                                                                                 <input type="text" class="form-control" name="no_kartu" value="<?= ($lu['no_kartu'] != null) ? $lu['no_kartu'] : ""; ?>"><br>
                                                                                 <label>Nomor Keputusan</label>
                                                                                 <input type="text" class="form-control" name="no_keputusan" value="<?= ($lu['no_keputusan'] != null) ? $lu['no_keputusan'] : ""; ?>"><br>
@@ -223,7 +223,7 @@
                                                         </form>
 
                                                         <!-- Modal -->
-                                                        <form method="POST" action="<?= base_url('karsu/crud_tandaterima'); ?>" enctype='multipart/form-data'>
+                                                        <form method="POST" action="<?= base_url('idcard/crud_tandaterima'); ?>" enctype='multipart/form-data'>
                                                             <div class="modal fade" id="modal-tandaTerima<?= $i ?>" tabindex="-1" aria-labelledby="tandaTerima3ModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content col-sm-10">
@@ -253,7 +253,7 @@
                                                                             <?php if ($path_berkas != null) { ?>
                                                                                 <br>
                                                                                 <a style="color:#fff" target="_blank" class="lihat btn btn-success btn-sm" href="<?= base_url($path_berkas); ?>" role="button"><i class="fas fa-eye"></i> Lihat</a>
-                                                                                <a style="color:#fff" class="lihat btn btn-danger btn-sm" href="<?= base_url('karsu/hapus_berkas_karsu/' . $id_berkas . '/' . $usulan['id']); ?>" role="button"><i class="fas fa-times-circle"></i> Batal</a>
+                                                                                <a style="color:#fff" class="lihat btn btn-danger btn-sm" href="<?= base_url('idcard/hapus_berkas_idcard/' . $id_berkas . '/' . $usulan['id']); ?>" role="button"><i class="fas fa-times-circle"></i> Batal</a>
                                                                                 <br><br>
                                                                             <?php } else { ?>
                                                                                 <input type='file' name='file' required><br><br>
